@@ -34,18 +34,49 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
 
   //execute post
   $result = curl_exec($ch);
-  echo $result;
+  $result = json_decode($result);
+  // echo $result;
   $accessToken = $result->access_token;
+  $refreshToken = $result->refresh_token;
+  echo "Access Token:- ".$accessToken;
 
   $_SESSION['accessToken'] = $accessToken;
+  $_SESSION['refreshToken'] = $accessToken;
+  if ($accessToken && !empty($accessToken)) {
+    echo '<script>window.location.href="dashboard"</script>';
+  }
 }
 ?>
 <div class="container text-center">
   <h1>Welcome to RAP Guru - ZoHo Admin Panel</h1>
   <h2>Dashboard</h2>
   <?php 
-    if ($_SESSION['accessToken']) {
-      echo $_SESSION['accessToken'];
+    if ($_SESSION['accessToken'] && !empty($_SESSION['accessToken'])) {
+      $accessToken = $_SESSION['accessToken'];
+      echo "Access Token:- ".$accessToken;
+      
+      //GEt organization details
+      $url = 'https://books.zoho.com/api/v3/organizations';
+        
+      //Initiate cURL.
+      $ch = curl_init($url);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+      $headers = array(
+        'Authorization: Zoho-oauthtoken '.$accessToken
+      );
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      //Execute the cURL request.
+      $response = curl_exec($ch);
+       
+      //Check for errors.
+      if(curl_errno($ch)){
+          //If an error occured, throw an Exception.
+          throw new Exception(curl_error($ch));
+      }
+       
+      //Print out the response.
+      echo $response;
     }
   ?>
 </div>
