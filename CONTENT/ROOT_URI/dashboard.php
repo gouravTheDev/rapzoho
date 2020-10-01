@@ -7,7 +7,7 @@
 if (isset($_GET['code']) && !empty($_GET['code'])) {
   $code = $_GET['code'];
   $_SESSION['code'] = $code;
-  $url = 'https://accounts.zoho.in/oauth/v2/token';
+  $url = 'https://accounts.zoho.com/oauth/v2/token';
 
   //The data you want to send via POST
   $fields = [
@@ -15,7 +15,8 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
       'client_id' => CLIENT_ID, 
       'client_secret' => CLIENT_SECRET, 
       'redirect_uri' => REDIRECT_URI, 
-      'grant_type' => 'authorization_code'
+      'grant_type' => 'authorization_code',
+      'scope' => 'ZohoBooks.fullaccess.all'
   ];
 
   //url-ify the data for the POST
@@ -56,7 +57,7 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
       echo "Access Token:- ".$accessToken;
       
       //GEt organization details
-      $url = 'https://books.zoho.in/api/v3/organizations';
+      $url = 'https://books.zoho.com/api/v3/organizations';
         
       //Initiate cURL.
       $ch = curl_init($url);
