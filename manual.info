@@ -1,0 +1,99 @@
+{
+  "Details": {
+    "Programs": "IIMTT,YLE"
+  },
+  "ValidFr": {
+    "ValidFrom": "2019-08-08"
+  },
+  "ValidTo": {
+    "ValidTo": "2019-08-03"
+  },
+  "Address": {
+    "FranName": "Beanstalk New",
+    "Line1": "3, sadhu Mukherjee road(2nd lane), p.o-Nona chandan pukur, Barrackpore, Kolkata-700122",
+    "City": "BARRACKPORE",
+    "Pin": "700122",
+    "Country": "Barbados",
+    "State": "Saint Philip",
+    "Agreement": "download.jpeg"
+  }
+}
+// DB structure `BS_USER`.`USER_JSOND`
+
+
+//IIMTT
+{
+  "Theory": {
+    "Number_of_item": "2",
+    "price": "150"
+  },
+  "Practical": {
+    "Number_of_item": "2",
+    "price": "150"
+  }
+}
+
+//3P age 3-4
+{
+  "Super Phonics": {
+    "Item_Details": "Super Phonics 1",
+    "Item_Id":"SP1",
+    "Number_of_item": "2",
+    "price": "150"
+  },
+  "Writo": {
+    "Item_Details": "Writo for IK1",
+    "Item_Id":"P-WR1",
+    "Number_of_item": "2",
+    "price": "150"
+  },
+  "Min-Max": {
+    "Item_Details": "Min-max for IK1",
+    "Item_Id":"MIN1",
+    "Number_of_item": "2",
+    "price": "150"
+  },
+}
+
+//3P age 4-5
+{
+  "Super Phonics": {
+    "Item_Details": "Super Phonics 2",
+    "Item_Id":"SP2",
+    "Number_of_item": "2",
+    "price": "150"
+  },
+  "Writo": {
+    "Item_Details": "Writo for IK2",
+    "Item_Id":"P-WR2",
+    "Number_of_item": "2",
+    "price": "150"
+  },
+  "Min-Max": {
+    "Item_Details": "Min-max for IK2",
+    "Item_Id":"MIN2",
+    "Number_of_item": "2",
+    "price": "150"
+  },
+}
+//3P age 5-6
+{
+  "Super Phonics": {
+    "Item_Details": "Super Phonics 3",
+    "Item_Id":"SP3",
+    "Number_of_item": "2",
+    "price": "150"
+  },
+  "Writo": {
+    "Item_Details": "Writo for IK3",
+    "Item_Id":"P-WR3",
+    "Number_of_item": "2",
+    "price": "150"
+  },
+  "Min-Max": {
+    "Item_Details": "Min-max for IK3",
+    "Item_Id":"MIN3",
+    "Number_of_item": "2",
+    "price": "150"
+  },
+}
