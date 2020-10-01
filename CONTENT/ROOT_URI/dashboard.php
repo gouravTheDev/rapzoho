@@ -16,7 +16,7 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
       'client_secret' => CLIENT_SECRET, 
       'redirect_uri' => REDIRECT_URI, 
       'grant_type' => 'authorization_code',
-      'scope' => 'ZohoBooks.fullaccess.all'
+      'scope' => 'ZohoBooks.invoices.CREATE,ZohoBooks.invoices.READ,ZohoBooks.invoices.UPDATE,ZohoBooks.invoices.DELETE'
   ];
 
   //url-ify the data for the POST
@@ -64,9 +64,9 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
       $headers = array(
-        'Authorization: Zoho-oauthtoken '.$accessToken
+        'Authorization: Zoho-oauthtoken '. $accessToken
       );
-      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, 'Authorization: Zoho-oauthtoken '. $accessToken);
       //Execute the cURL request.
       $response = curl_exec($ch);
        
