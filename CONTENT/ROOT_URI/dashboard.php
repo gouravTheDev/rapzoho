@@ -42,9 +42,9 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
   $refreshToken = $result->refresh_token;
   // echo "Access Token:- ".$accessToken;
 
-  $_SESSION['accessToken'] = $accessToken;
-  $_SESSION['refreshToken'] = $refreshToken;
-  if ($accessToken && !empty($accessToken)) {
+  $_SESSION['accessToken'] = $result->access_token;;
+  $_SESSION['refreshToken'] = $result->refresh_token;
+  if ($_SESSION['accessToken'] && !empty($_SESSION['accessToken'])) {
     echo '<script>window.location.href="dashboard"</script>';
   }
 }
@@ -56,73 +56,32 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
     if ($_SESSION['accessToken'] && !empty($_SESSION['accessToken'])) {
       // Generate access token from refresh token
 
-      $url = 'https://accounts.zoho.com/oauth/v2/token';
-      $refreshToken = $_SESSION['refreshToken'];
-
-      //The data you want to send via POST
-      $fields = [
-          'refresh_token' => $refreshToken, 
-          'client_id' => CLIENT_ID, 
-          'client_secret' => CLIENT_SECRET, 
-          'redirect_uri' => REDIRECT_URI, 
-          'grant_type' => 'refresh_token',
-      ];
-
-      //url-ify the data for the POST
-      $fields_string = http_build_query($fields);
-
-      //open connection
-      $ch = curl_init();
-
-      //set the url, number of POST vars, POST data
-      curl_setopt($ch,CURLOPT_URL, $url);
-      curl_setopt($ch,CURLOPT_POST, true);
-      curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-
-      //So that curl_exec returns the contents of the cURL; rather than echoing it
-      curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
-
-      //execute post
-      $result = curl_exec($ch);
-      $result = json_decode($result);
-      print_r($result);
-      // echo $result;
-      $accessToken = $result->access_token;
-      $refreshToken = $result->refresh_token;
-      // echo "Access Token:- ".$accessToken;
-
-      $_SESSION['accessToken'] = $accessToken;
-      $_SESSION['refreshToken'] = $refreshToken;
-
-
       //Call API
-      // $accessToken = $_SESSION['accessToken'];
-      // print_r($_SESSION);
-      // echo "Access Token:- ".$accessToken;
+      $accessToken = $_SESSION['accessToken'];
+      print_r($_SESSION);
+      echo "Access Token:- ".$accessToken;
       
-      // //GEt organization details
-      // $url = 'https://books.zoho.com/api/v3/organizations';
+      //GEt organization details
+      $url = 'https://books.zoho.com/api/v3/organizations';
         
-      // //Initiate cURL.
-      // $ch = curl_init($url);
-      // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      //Initiate cURL.
+      $ch = curl_init($url);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-      // $header = array();
-      // $header[] = 'Content-length: 0';
-      // $header[] = 'Content-type: application/json';
-      // $header[] = 'Authorization: Zoho-oauthtoken '.$accessToken;
-      // curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-      // //Execute the cURL request.
-      // $response = curl_exec($ch);
+      $header = array();
+      $header[] = 'Authorization: Zoho-oauthtoken '.$accessToken;
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+      //Execute the cURL request.
+      $response = curl_exec($ch);
        
-      // //Check for errors.
-      // if(curl_errno($ch)){
-      //     //If an error occured, throw an Exception.
-      //     throw new Exception(curl_error($ch));
-      // }
+      //Check for errors.
+      if(curl_errno($ch)){
+          //If an error occured, throw an Exception.
+          throw new Exception(curl_error($ch));
+      }
        
-      // //Print out the response.
-      // echo $response;
+      //Print out the response.
+      echo $response;
     }
   ?>
 </div>
