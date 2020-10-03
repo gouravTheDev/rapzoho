@@ -37,14 +37,14 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
   $result = curl_exec($ch);
   $result = json_decode($result);
   print_r($result);
-  echo $result;
+  // echo $result;
   $accessToken = $result->access_token;
   $refreshToken = $result->refresh_token;
   // echo "Access Token:- ".$accessToken;
 
   $_SESSION['accessToken'] = $accessToken;
   $_SESSION['refreshToken'] = $refreshToken;
-  if ($accessToken && !empty($accessToken)) {
+  if ($_SESSION['accessToken'] && !empty($_SESSION['accessToken'])) {
     echo '<script>window.location.href="dashboard"</script>';
   }
 }
