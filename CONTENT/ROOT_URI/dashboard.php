@@ -44,24 +44,8 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
 
   $_SESSION['accessToken'] = $result->access_token;;
   $_SESSION['refreshToken'] = $result->refresh_token;
-  if ($_SESSION['accessToken'] && !empty($_SESSION['accessToken'])) {
-    echo '<script>window.location.href="dashboard"</script>';
-  }
-}
-?>
-<div class="container text-center">
-  <h1>Welcome to RAP Guru - ZoHo Admin Panel</h1>
-  <h2>Dashboard</h2>
-  <?php 
-    if ($_SESSION['accessToken'] && !empty($_SESSION['accessToken'])) {
-      // Generate access token from refresh token
-
-      //Call API
-      $accessToken = $_SESSION['accessToken'];
-      print_r($_SESSION);
-      echo "Access Token:- ".$accessToken;
-      
-      //GEt organization details
+  if ($result->access_token && !empty($result->access_token)) {
+    //GEt organization details
       $url = 'https://books.zoho.com/api/v3/organizations';
         
       //Initiate cURL.
@@ -69,7 +53,7 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
       $header = array();
-      $header[] = 'Authorization: Zoho-oauthtoken '.$accessToken;
+      $header[] = 'Authorization: Zoho-oauthtoken '.$result->access_token;
       curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
       //Execute the cURL request.
       $response = curl_exec($ch);
@@ -82,7 +66,43 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
        
       //Print out the response.
       echo $response;
-    }
+  }
+}
+?>
+<div class="container text-center">
+  <h1>Welcome to RAP Guru - ZoHo Admin Panel</h1>
+  <h2>Dashboard</h2>
+  <?php 
+    // if ($_SESSION['accessToken'] && !empty($_SESSION['accessToken'])) {
+    //   // Generate access token from refresh token
+
+    //   //Call API
+    //   $accessToken = $_SESSION['accessToken'];
+    //   print_r($_SESSION);
+    //   echo "Access Token:- ".$accessToken;
+      
+    //   //GEt organization details
+    //   $url = 'https://books.zoho.com/api/v3/organizations';
+        
+    //   //Initiate cURL.
+    //   $ch = curl_init($url);
+    //   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    //   $header = array();
+    //   $header[] = 'Authorization: Zoho-oauthtoken '.$accessToken;
+    //   curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+    //   //Execute the cURL request.
+    //   $response = curl_exec($ch);
+       
+    //   //Check for errors.
+    //   if(curl_errno($ch)){
+    //       //If an error occured, throw an Exception.
+    //       throw new Exception(curl_error($ch));
+    //   }
+       
+    //   //Print out the response.
+    //   echo $response;
+    // }
   ?>
 </div>
 
