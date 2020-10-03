@@ -42,7 +42,7 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
   echo "Access Token:- ".$accessToken;
 
   $_SESSION['accessToken'] = $accessToken;
-  $_SESSION['refreshToken'] = $accessToken;
+  $_SESSION['refreshToken'] = $refreshToken;
   if ($accessToken && !empty($accessToken)) {
     echo '<script>window.location.href="dashboard"</script>';
   }
@@ -54,6 +54,7 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
   <?php 
     if ($_SESSION['accessToken'] && !empty($_SESSION['accessToken'])) {
       $accessToken = $_SESSION['accessToken'];
+      print_r($_SESSION);
       echo "Access Token:- ".$accessToken;
       
       //GEt organization details
