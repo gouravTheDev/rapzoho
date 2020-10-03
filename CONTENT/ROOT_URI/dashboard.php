@@ -45,7 +45,7 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
   $_SESSION['accessToken'] = $accessToken;
   $_SESSION['refreshToken'] = $refreshToken;
   if ($accessToken && !empty($accessToken)) {
-    // echo '<script>window.location.href="dashboard"</script>';
+    echo '<script>window.location.href="dashboard"</script>';
   }
 }
 ?>
