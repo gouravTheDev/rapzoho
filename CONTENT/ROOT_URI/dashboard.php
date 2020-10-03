@@ -64,10 +64,11 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
       $ch = curl_init($url);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-      $headers = array(
-        'Authorization: Zoho-oauthtoken '. $accessToken
-      );
-      curl_setopt($ch, CURLOPT_HTTPHEADER, 'Authorization: Zoho-oauthtoken '. $accessToken);
+      $header = array();
+      $header[] = 'Content-length: 0';
+      $header[] = 'Content-type: application/json';
+      $header[] = 'Authorization: Zoho-oauthtoken '.$accessToken;
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
       //Execute the cURL request.
       $response = curl_exec($ch);
        
